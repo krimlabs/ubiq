@@ -1,0 +1,6 @@
+{:db {:database "festivals_hugg_dev"
+      :host "localhost"
+      :port 5432
+      :user "shivekkhurana"
+      :password ""}
+ :enable-graphiql? true}
