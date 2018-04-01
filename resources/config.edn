@@ -1,4 +1,4 @@
-{:db {:database "festivals_hugg_dev"
+{:db {:database "appuity_dev"
       :host "localhost"
       :port 5432
       :user "shivekkhurana"

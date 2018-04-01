@@ -50,7 +50,7 @@
     (let [domain (-> "src/kakan/domain"
                      read-file-tree
                      generate-domain-map
-                     (inject-db db))]
+                     (inject-db (:db db)))]
       (assoc component :domain domain)))
 
   (stop [component]
