@@ -14,8 +14,7 @@
                      io/resource
                      slurp
                      edn/read-string
-                     (util/attach-resolvers {:resolve-hello (fn [_ _ _]
-                                                              "Hello World !")})
+                     (util/attach-resolvers {:resolve-hello (get-in domain [:domain :festivals :get-all-artists])})
                      schema/compile)]
       (assoc component :compiled-schema schema)))
 
