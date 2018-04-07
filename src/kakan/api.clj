@@ -2,6 +2,7 @@
   (:require [com.stuartsierra.component :as component]
             [kakan.components.database :refer [new-database]]
             [kakan.components.domain :refer [new-domain]]
+            [kakan.components.resolver-map :refer [new-resolver-map]]
             [kakan.components.graphql-schema :refer [new-graphql-schema]]
             [kakan.components.server :refer [new-server]]))
 
@@ -10,8 +11,9 @@
        :db (new-database (:db config))
        :domain (new-domain)
        :graphql-schema (new-graphql-schema)
+       :resolver-map (new-resolver-map)
        :server (new-server (:enable-graphiql? config)))
       (component/system-using
        {:domain [:db]
-        :graphql-schema [:domain]
+        :graphql-schema [:domain :resolver-map]
         :server [:graphql-schema]})))

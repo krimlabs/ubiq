@@ -5,17 +5,7 @@
             [com.walmartlabs.lacinia.util :as util]
             [com.stuartsierra.component :as component]))
 
-(defn- get-resolver-map [domain]
-  {:resolve-hello (fn [_ _ _]
-                    "Hello World!")
-   :apps (fn [_ _ _]
-           ((get-in domain [:domain :apps :get-all-apps])))
-   :authors (fn [_ _ _]
-              ((get-in domain [:domain :authors :get-all-authors])))
-   :reviews (fn [_ _ _]
-              ((get-in domain [:domain :reviews :get-all-reviews])))})
-
-(defrecord GraphqlSchema [domain]
+(defrecord GraphqlSchema [domain resolver-map]
 
   component/Lifecycle
 
@@ -24,7 +14,7 @@
                      io/resource
                      slurp
                      edn/read-string
-                     (util/attach-resolvers (get-resolver-map domain))
+                     (util/attach-resolvers (:compiled-blueprint resolver-map))
                      schema/compile)]
       (assoc component :compiled-schema schema)))
 

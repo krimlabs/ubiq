@@ -15,7 +15,8 @@
       (assoc component :server server)))
 
   (stop [component]
-    (http/stop server)
+    (when server
+      (http/stop server))
     (assoc component :server nil)))
 
 

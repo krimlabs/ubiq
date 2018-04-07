@@ -1,0 +1,8 @@
+{:apps/get-all-apps
+ [[:domain :apps :get-all-apps]]
+
+ :reviews/get-all-reviews
+ [[:domain :reviews :get-all-reviews]]
+
+ :authors/get-all-authors
+ [[:domain :authors :get-all-authors]]}
