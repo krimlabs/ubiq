@@ -1,14 +1,21 @@
 {:paths ["src" "resources"]
 
  :deps
- {;;ubiq {:local/root "/Users/shivekkhurana/WIP/Krim/ubiq"}
-  integrant {:mvn/version "0.7.0"}
+ {integrant {:mvn/version "0.7.0"}
   org.slf4j/slf4j-simple {:mvn/version "1.7.26"}
   org.xerial/sqlite-jdbc {:mvn/version "3.27.2.1"}
   org.clojure/java.jdbc {:mvn/version "0.7.9"}
-  com.layerware/hugsql {:mvn/version "0.4.9"}}
+  com.layerware/hugsql {:mvn/version "0.4.9"}
+  com.walmartlabs/lacinia {:mvn/version "0.32.0"}
+  com.walmartlabs/lacinia-pedestal {:mvn/version "0.11.0"}
+  ragtime {:mvn/version "0.8.0"}}
 
  :aliases
  {:dev
   {:extra-paths ["dev"]
-   :extra-deps {integrant/repl {:mvn/version "0.3.1"}}}}}
+   :extra-deps {integrant/repl {:mvn/version "0.3.1"}}}}
+
+ :mvn/repos
+ {"central" {:url "https://repo1.maven.org/maven2/"}
+  "clojars" {:url "https://clojars.org/repo"}}}
+

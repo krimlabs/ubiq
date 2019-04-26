@@ -1,4 +1,4 @@
-(ns kakan-erp.components.graphql-server
+(ns components.graphql-server
   (:require [clojure.java.io :as io]
             [clojure.edn :as edn]
             [integrant.core :as ig]

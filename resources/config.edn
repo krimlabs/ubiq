@@ -1,4 +1,5 @@
 {:graphql-server {:enable-graphiql? true :database #ig/ref :database}
  :database {:spec {:classname "org.sqlite.JDBC"
                    :subprotocol "sqlite"
-                   :subname ":memory:"}}}
+                   :subname "resources/dev.db"}}
+ :migrator {:database #ig/ref :database}}
