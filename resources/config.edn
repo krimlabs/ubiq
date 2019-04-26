@@ -1,6 +1,4 @@
-{:db {:database "appuity_dev"
-      :host "localhost"
-      :port 5432
-      :user "shivekkhurana"
-      :password ""}
- :enable-graphiql? true}
+{:graphql-server {:enable-graphiql? true :database #ig/ref :database}
+ :database {:spec {:classname "org.sqlite.JDBC"
+                   :subprotocol "sqlite"
+                   :subname ":memory:"}}}

@@ -1,47 +1,22 @@
-{:objects
- {:app
-  {:fields
-   {:id {:type Int}
-    :name {:type String}
-    :category {:type String}
-    :total_ratings {:type String}
-    :icon_url {:type String}
-    :avg_rating {:type String}
-    :last_updated {:type String}
-    :current_version {:type String}
-    :no_of_downloads {:type String}
-    :offered_by {:type String}
-    :play_store_id {:type String}
-    :created_at {:type String}
-    :updated_at {:type String}}}
-  :author
-  {:fields
-   {:id {:type Int}
-    :name {:type String}
-    :avatar_url {:type String}
-    :created_at {:type String}
-    :updated_at {:type String}}}
-  :review
-  {:fields
-   {:id {:type Int}
-    :rating {:type Int}
-    :review_text {:type String}
-    :date {:type String}  ;; reviewed on
-    :analysis {:type String}   ;; is json actually
-    :created_at {:type String}
-    :updated_at {:type String}}}}
+{:enums
+ {:episode
+  {:description "The episodes of the original Star Wars trilogy."
+   :values [:NEWHOPE :EMPIRE :JEDI]}}
+
+ :objects
+ {:droid
+  {:fields {:primary_functions {:type (list String)}
+            :id {:type Int}
+            :name {:type String}
+            :appears_in {:type (list :episode)}}}
+
+  :human
+  {:fields {:id {:type Int}
+            :name {:type String}
+            :home_planet {:type String}
+            :appears_in {:type (list :episode)}}}}
 
  :queries
- {:apps
-  {:type (list :app)
-   :resolve :apps}
-  :authors
-  {:type (list :author)
-   :resolve :authors}
-  :reviews
-  {:type (list :review)
-   :resolve :reviews}
-  :hello
-  {:type String
-   :resolve :resolve-hello}}
- }
+ {:hero {:type (non-null :human)
+         :args {:episode {:type :episode}}
+         :resolve :get-hero}}}
