@@ -1,5 +1,19 @@
-{:graphql-server {:enable-graphiql? true :database #ig/ref :database}
- :database {:spec {:classname "org.sqlite.JDBC"
-                   :subprotocol "sqlite"
-                   :subname "resources/dev.db"}}
- :migrator {:database #ig/ref :database}}
+{:sqlite-spec
+ #profile
+ {:dev {:classname "org.sqlite.JDBC"
+        :subprotocol "sqlite"
+        :subname "resources/dev.db"}}
+
+ :seed-data?
+ #profile
+ {:default false
+  :dev true}
+
+ :system
+ {:graphql-server {:enable-graphiql? true
+                   :database #ig/ref :database}
+  :database {:spec #ref [:sqlite-spec]}
+  :migrator {:spec #ref [:sqlite-spec]}
+  :domain {:database #ig/ref :database}
+  :seeder {:seed-data? #ref [:seed-data?]
+           :domain #ig/ref :domain}}}

@@ -4,8 +4,7 @@
             [integrant.core :as ig]))
 
 (defmethod ig/init-key :database [_ {:keys [spec]}]
-  {:connection (jdbc/get-connection spec)
-   :spec spec})
+  (jdbc/get-connection spec))
 
-(defmethod ig/halt-key! :database [_ database]
-  (.close (:connection database)))
+(defmethod ig/halt-key! :database [_ connection]
+  (.close connection))

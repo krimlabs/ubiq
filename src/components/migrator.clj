@@ -3,9 +3,8 @@
             [ragtime.repl :as repl]
             [integrant.core :as ig]))
 
-
-(defmethod ig/init-key :migrator [_ {:keys [database]}]
-  (let [config {:datastore (jdbc/sql-database (:spec database))
+(defmethod ig/init-key :migrator [_ {:keys [spec]}]
+  (let [config {:datastore (jdbc/sql-database spec)
                 :migrations (jdbc/load-resources "migrations")}]
     (repl/migrate config)
     config))
