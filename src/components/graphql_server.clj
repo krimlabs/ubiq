@@ -7,13 +7,16 @@
             [com.walmartlabs.lacinia.schema :as schema]
             [io.pedestal.http :as http]))
 
-(defmethod ig/init-key :graphql-server [_ {:keys [enable-graphiql? database]}]
+(defmethod ig/init-key :graphql-server [_ {:keys [enable-graphiql? domain]}]
   (-> "schema.edn"
       io/resource
       slurp
       edn/read-string
       (attach-resolvers {:get-hero (fn [_ _ _]
-                                     {:hello :world})})
+                                     {:hello :world})
+                         :parties/get-parties (fn [_ _ _] ((get-in domain [:parties :select-all-parties])))
+                         :products/get-products (fn [_ _ _] ((get-in domain [:products :select-all-products])))
+                         })
       schema/compile
       (service-map {:graphiql enable-graphiql?})
       http/create-server

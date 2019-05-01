@@ -7,11 +7,11 @@
   (hugsql/map-of-db-fns
    (io/resource (str "sql/" (name domain-entity) ".sql"))))
 
-(defn- inject-db [database db-fns-map]
+(defn- inject-db [db db-fns-map]
   (into {} (map (fn [[k v]]
-                  [k (partial (:fn v) database)])
+                  [k (partial (:fn v) db)])
                 db-fns-map)))
 
-(defmethod ig/init-key :domain [_ {:keys [database]}]
-  (prn (type database))
-  {:parties (inject-db database (get-db-fns-map :parties))})
+(defmethod ig/init-key :domain [_ {:keys [db]}]
+  {:parties (inject-db db (get-db-fns-map :parties))
+   :products (inject-db db (get-db-fns-map :products))})

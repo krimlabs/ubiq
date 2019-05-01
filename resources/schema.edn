@@ -4,7 +4,14 @@
    :values [:NEWHOPE :EMPIRE :JEDI]}}
 
  :objects
- {:droid
+ {:party
+  {:fields {:id {:type Int}
+            :name {:type String}
+            :address {:type String}}}
+  :product
+  {:fields {:id {:type Int}
+            :name {:type String}}}
+  :droid
   {:fields {:primary_functions {:type (list String)}
             :id {:type Int}
             :name {:type String}
@@ -17,6 +24,10 @@
             :appears_in {:type (list :episode)}}}}
 
  :queries
- {:hero {:type (non-null :human)
+ {:parties {:type (list :party)
+            :resolve :parties/get-parties}
+  :products {:type (list :product)
+             :resolve :products/get-products}
+  :hero {:type (non-null :human)
          :args {:episode {:type :episode}}
          :resolve :get-hero}}}

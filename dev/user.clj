@@ -5,7 +5,6 @@
    [integrant.repl :refer [clear go halt prep init reset reset-all]]
    [aero.core :refer [read-config reader]]
    [components.graphql-server]
-   [components.database]
    [components.migrator]
    [components.domain]
    [components.seeder]))
@@ -21,6 +20,11 @@
 
 (def system
   integrant.repl.state/system)
+
+(defn start []
+  (prep)
+  (init)
+  (reset))
 
 
 

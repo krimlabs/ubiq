@@ -1,4 +1,4 @@
-{:sqlite-spec
+{:sqlite-config
  #profile
  {:dev {:classname "org.sqlite.JDBC"
         :subprotocol "sqlite"
@@ -11,9 +11,10 @@
 
  :system
  {:graphql-server {:enable-graphiql? true
-                   :database #ig/ref :database}
-  :database {:spec #ref [:sqlite-spec]}
-  :migrator {:spec #ref [:sqlite-spec]}
-  :domain {:database #ig/ref :database}
-  :seeder {:seed-data? #ref [:seed-data?]
-           :domain #ig/ref :domain}}}
+                   :domain #ig/ref :domain}
+  :migrator {:db #ref [:sqlite-config]}
+  :domain {:db #ref [:sqlite-config]}
+  :seeder {:seed-count {:parties 10}
+           :seed-data? #ref [:seed-data?]
+           :domain #ig/ref :domain
+           :migrator #ig/ref :migrator}}}

@@ -1,0 +1,9 @@
+{:parties/get-parties
+ [:auth/logged-in
+  :auth/has-role {:roles [:admin]}
+  :db/get-parties]
+
+ :products/get-products
+ [:auth/logged-in
+  :auth/has-role {:roles [:admin]}
+  :db/get-products]}
