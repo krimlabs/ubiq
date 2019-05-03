@@ -4,20 +4,23 @@
             [integrant.core :as ig]
             [resolver-steps.auth :as auth]))
 
-(defn handle-exit-wrapper
-  ([f ctx] (handle-exit-wrapper f ctx {} {}))
-  ([f ctx args value]
-   (prn "-> " f ctx args value)
-   (or (:exit ctx) (f ctx args value))))
+(defn- handle-exit-wrapper [f ctx]
+  (or (:exit ctx) (f ctx)))
 
-(defn compile-steps [steps]
-  (apply comp
-         (reverse
-          (map
-           #(partial
-             handle-exit-wrapper
-             (resolve (symbol (str "resolver-steps." (namespace %) "/" (name %)))))
-           steps))))
+(defn- compile-steps [steps]
+  (let [wrapped-functions (map
+                           #(partial
+                             handle-exit-wrapper
+                             (resolve (symbol (str "resolver-steps." (namespace %) "/" (name %)))))
+                           steps)
+        resolver-fn (apply comp (reverse wrapped-functions))]
+
+    ;; return a function that converts lacinia's three args resolver to ubiq's single arg resolver
+    (fn [lacinia-ctx args value]
+      (resolver-fn
+       {:lacinia-ctx lacinia-ctx
+        :args args
+        :value value}))))
 
 (defn get-resolvers-config []
   (-> "resolvers.edn"
