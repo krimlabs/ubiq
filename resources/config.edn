@@ -11,8 +11,10 @@
 
  :system
  {:graphql-server {:enable-graphiql? true
-                   :domain #ig/ref :domain}
+                   :domain #ig/ref :domain
+                   :resolver #ig/ref :resolver}
   :migrator {:db #ref [:sqlite-config]}
+  :resolver {:domain #ig/ref :domain}
   :domain {:db #ref [:sqlite-config]}
   :seeder {:seed-count {:parties 10}
            :seed-data? #ref [:seed-data?]

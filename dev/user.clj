@@ -7,7 +7,8 @@
    [components.graphql-server]
    [components.migrator]
    [components.domain]
-   [components.seeder]))
+   [components.seeder]
+   [components.resolver]))
 
 
 (defmethod reader 'ig/ref [_ _ value]
