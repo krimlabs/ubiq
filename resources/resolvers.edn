@@ -10,4 +10,9 @@
 
 {:parties/get-parties
  [auth/logged-in?
-  auth/has-role?]}
+  auth/has-role?
+  {:fn domain/executor :args {:path [:parties :select-all-parties]}}]
+ :products/get-products
+ [auth/logged-in?]
+ :get-hero
+ [auth/logged-in]}

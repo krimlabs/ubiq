@@ -11,8 +11,9 @@
 
  :system
  {:graphql-server {:enable-graphiql? true
-                   :domain #ig/ref :domain
-                   :resolver #ig/ref :resolver}
+                   :port 8000
+                   :resolver #ig/ref :resolver
+                   :domain #ig/ref :domain}
   :migrator {:db #ref [:sqlite-config]}
   :resolver {:domain #ig/ref :domain}
   :domain {:db #ref [:sqlite-config]}
