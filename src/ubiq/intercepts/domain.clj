@@ -1,4 +1,4 @@
-(ns intercepts.domain)
+(ns ubiq.intercepts.domain)
 
 (defn executor [{:keys [lacinia-ctx args value interceptor-args] :as ctx}]
   (let [domain (:domain lacinia-ctx)

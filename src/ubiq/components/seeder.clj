@@ -1,4 +1,4 @@
-(ns components.seeder
+(ns ubiq.components.seeder
   (:require [clojure.tools.logging :as log]
             [integrant.core :as ig]
             [hugsql.core :as hugsql]

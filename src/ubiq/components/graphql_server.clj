@@ -1,4 +1,4 @@
-(ns components.graphql-server
+(ns ubiq.components.graphql-server
   (:require [clojure.java.io :as io]
             [clojure.edn :as edn]
             [integrant.core :as ig]
@@ -7,8 +7,8 @@
             [com.walmartlabs.lacinia.schema :as schema]
             [io.pedestal.http :as http]))
 
-(defmethod ig/init-key :graphql-server [_ {:keys [enable-graphiql? port resolver domain]}]
-  (-> "schema.edn"
+(defmethod ig/init-key :graphql-server [_ {:keys [enable-graphiql? port resolver domain schema-resource]}]
+  (-> schema-resource
       io/resource
       slurp
       edn/read-string

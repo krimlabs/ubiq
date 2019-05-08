@@ -4,18 +4,18 @@
    [integrant.core :as ig]
    [integrant.repl :refer [clear go halt prep init reset reset-all]]
    [aero.core :refer [read-config reader]]
-   [components.graphql-server]
-   [components.migrator]
-   [components.domain]
-   [components.seeder]
-   [components.resolver]))
+   [ubiq.components.graphql-server]
+   [ubiq.components.migrator]
+   [ubiq.components.domain]
+   [ubiq.components.seeder]
+   [ubiq.components.resolver]))
 
 
 (defmethod reader 'ig/ref [_ _ value]
   (ig/ref value))
 
 (def config
-  (read-config (io/resource "config.edn") {:profile :dev}))
+  (read-config (io/resource "erp_app/config.edn") {:profile :dev}))
 
 (integrant.repl/set-prep! (constantly (:system config)))
 

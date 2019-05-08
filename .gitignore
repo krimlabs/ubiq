@@ -10,5 +10,5 @@ pom.xml.asc
 .hgignore
 .hg/
 .cpcache
-resources/dev.db
+resources/**/dev.db
 log/

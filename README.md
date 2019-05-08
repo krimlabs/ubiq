@@ -2,11 +2,9 @@
 
 Ubiq is an experimental way to build GraphQL apis with minimal code.
 
-### Introduction
-
 The central idea is to define all resolvers as a series of interceptors. These interceptors are invoked in order, can pass data down the next interceptor and can exit in case of errors. All interceptors are defined statically in `resolvers.edn` file.
 
-Ubiq also provides components that help you tie GraphQL queries and mutations directly to SQL statements via HugSQL.
+Ubiq also provides components that help you tie GraphQL queries and mutations directly to SQL statements via HugSQL and an authentication mechanism to speed up development of new projects.
 
 
 ### Getting started

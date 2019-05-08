@@ -1,0 +1,28 @@
+{:app-folder "erp_app"
+ :sqlite-config
+ #profile
+ {:dev {:classname "org.sqlite.JDBC"
+        :subprotocol "sqlite"
+        :subname #join ["resources/" #ref [:app-folder] "/dev.db"]}}
+
+ :seed-data?
+ #profile
+ {:default false
+  :dev true}
+
+ :system
+ {:graphql-server {:enable-graphiql? true
+                   :port 8000
+                   :resolver #ig/ref :resolver
+                   :domain #ig/ref :domain
+                   :schema-resource #join [#ref [:app-folder] "/schema.edn"]}
+  :migrator {:db #ref [:sqlite-config]
+             :migrations-folder #join [#ref [:app-folder] "/migrations"]}
+  :resolver {:domain #ig/ref :domain
+             :resolver-config-resource #join [#ref [:app-folder] "/resolvers.edn"]}
+  :domain {:db #ref [:sqlite-config]
+           :sql-folder #join ["src/" #ref [:app-folder] "/sql"]}
+  :seeder {:seed-count {:parties 10}
+           :seed-data? #ref [:seed-data?]
+           :domain #ig/ref :domain
+           :migrator #ig/ref :migrator}}}

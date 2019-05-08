@@ -1,4 +1,4 @@
-(ns intercepts.auth)
+(ns ubiq.intercepts.auth)
 
 (defn- is-logged-in? [_]
   true)
