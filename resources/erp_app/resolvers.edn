@@ -9,10 +9,10 @@
 ;;   :db/get-products]}
 
 {:parties/get-parties
- [auth/logged-in?
-  auth/has-role?
-  {:fn domain/executor :args {:path [:parties :select-all-parties]}}]
+ [ubiq.intercepts.auth/logged-in?
+  ubiq.intercepts.auth/has-role?
+  {:fn ubiq.intercepts.domain/executor :args {:path [:parties :select-all-parties]}}]
  :products/get-products
- [auth/logged-in?]
+ [ubiq.intercepts.auth/logged-in?]
  :get-hero
- [auth/logged-in]}
+ [ubiq.intercepts.auth/logged-in?]}

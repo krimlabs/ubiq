@@ -6,7 +6,7 @@
    [aero.core :refer [read-config reader]]
    [ubiq.components.graphql-server]
    [ubiq.components.migrator]
-   [ubiq.components.domain]
+   [ubiq.components.db-fns]
    [ubiq.components.seeder]
    [ubiq.components.resolver]))
 

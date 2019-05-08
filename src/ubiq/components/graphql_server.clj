@@ -7,7 +7,7 @@
             [com.walmartlabs.lacinia.schema :as schema]
             [io.pedestal.http :as http]))
 
-(defmethod ig/init-key :graphql-server [_ {:keys [enable-graphiql? port resolver domain schema-resource]}]
+(defmethod ig/init-key :graphql-server [_ {:keys [enable-graphiql? port resolver db-fns schema-resource]}]
   (-> schema-resource
       io/resource
       slurp
@@ -15,7 +15,7 @@
       (attach-resolvers resolver)
       schema/compile
       (service-map {:graphiql enable-graphiql?
-                    :app-context {:domain domain} ;; introduce domain in app-ctx, used by domain interceptor
+                    :app-context {:db-fns db-fns} ;; introduce db-fns in lacinia-app-ctx, used by domain interceptor
                     :port port})
       http/create-server
       http/start))

@@ -1,4 +1,4 @@
-(ns ubiq.components.domain
+(ns ubiq.components.db-fns
   (:require [clojure.java.io :as io]
             [clojure.string :as str]
             [hugsql.core :as hugsql]
@@ -25,7 +25,7 @@
 (defn- path->file [p]
   (last (str/split p #"/")))
 
-(defmethod ig/init-key :domain [_ {:keys [db sql-folder]}]
+(defmethod ig/init-key :db-fns [_ {:keys [db sql-folder]}]
   (let [sql-file-paths (read-file-tree sql-folder) ; read all files in src/sql folder returns ("src/erp_app/sql/products.sql" "src/erp_app/sql/parties.sql")
         sql-files (map path->file sql-file-paths) ; figure out the name of sql file (sql folder cannot have sub folders with this setup)
         sql-folder-without-src (str/replace sql-folder #"src/" "")]
@@ -33,3 +33,18 @@
                     [(keyword (str/replace file-name-dot-sql #".sql" ""))
                      (inject-db db (get-db-fns-map (str sql-folder-without-src "/" file-name-dot-sql)))])
                   sql-files))))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

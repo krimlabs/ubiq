@@ -1,9 +1,7 @@
 (ns ubiq.components.resolver
   (:require [clojure.java.io :as io]
             [clojure.edn :as edn]
-            [integrant.core :as ig]
-            [ubiq.intercepts.auth :as auth]
-            [ubiq.intercepts.domain :as domain]))
+            [integrant.core :as ig]))
 
 (defn- handle-exit-wrapper [{:keys [i-fn i-args]} ctx]
   (let [ctx-with-i-args (assoc-in ctx [:interceptor-args] i-args)]
@@ -14,7 +12,7 @@
 (defn- resolve-interceptor-fn-symbol [s]
   ;; assuming that all intercepts will be under intercepts. namespace
   ;; and will be imported in this domain! (Can improve DX here by checking that ns exists)
-  (resolve (symbol (str "ubiq.intercepts." (namespace s) "/" (name s)))))
+  (resolve (symbol (str (namespace s) "/" (name s)))))
 
 (defn- intercept->interceptor-fn [intercept]
   ;; allow for different kinds of interceptor config and normalise it here
